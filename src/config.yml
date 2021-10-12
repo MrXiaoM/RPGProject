@@ -1,0 +1,297 @@
+
+# 技能编辑器 - 在技能列表预览某技能属性时最多显示的属性数量
+# 超出限制数量的属性将用“... 等共x项”来表示
+power-prop-preview-items: 6
+
+# 语言
+lang:
+  prefix: '&7[&cRPGProject&7]&f '
+  reload: '&a配置文件已重载'
+  player-only: '&c此命令仅玩家可用'
+  rpgitem-no-found: '&c无法找到指定的神器'
+  help:
+  - '&cRPGProject &e命令帮助:'
+  - '&e/rpgui edit <神器ID> &b编辑神器&7(不填参数编辑手中神器)'
+  - '&e/rpgui reload &b重载插件配置文件'
+  damage-change-mode:
+    both: '最大和最小伤害一起修改'
+    min: '只修改最小伤害'
+    max: '只修改最大伤害'
+  gui:
+    editor:
+      title: '&0编辑 %display% &8(%name%)'
+      prompt:
+        display-name: '请打开聊天栏发送神器展示名 (发送 cancel 取消输入)'
+        display-name-1: '已设置神器 %name% 的展示名为 %display%'
+        
+        # 已设置lore的消息中可用 %content% 代表修改的描述，%line% 代表该描述所在行号
+        add-lore: '请打开聊天栏发送要增加的描述 (发送 cancel 取消输入)'
+        add-lore-1: '已设置神器 %name% 的描述'
+        
+        insert-lore: '请打开聊天栏发送要插入的行号 (发送 cancel 取消输入)'
+        insert-lore-1: '你输入的行号无效'
+        insert-lore-2: '请打开聊天栏发送要插入的描述内容 (发送 cancel 取消输入)'
+        insert-lore-3: '已设置神器 %name% 的描述'
+        
+        del-lore: '请打开聊天栏发送要删除的行号 (发送 cancel 取消输入)'
+        del-lore-1: '你输入的行号无效'
+        del-lore-2: '已设置神器 %name% 的描述'
+        
+        set-lore: '请打开聊天栏发送要设置的行号 (发送 cancel 取消输入)'
+        set-lore-1: '你输入的行号无效'
+        set-lore-2: '请打开聊天栏发送要设置的描述内容 (发送 cancel 取消输入)'
+        set-lore-3: '已设置神器 %name% 的描述'
+        
+        set-damage: '请打开聊天栏发送神器伤害 (发送 cancel 取消输入)'
+        
+        set-armour: '请打开聊天栏发送神器护甲值 (发送 cancel 取消输入)'
+        
+        set-armour-expression: '请打开聊天栏发送神器护甲值表达式 (发送 cancel 取消输入)'
+        
+        set-material: '请打开聊天栏发送神器物品材质 (发送 cancel 取消输入)'
+        set-material-1: '你输入的物品材质无效'
+        set-material-2: '已设置神器 %name% 的物品材质为 %material%'
+        
+        set-custom-model-data: '请打开聊天栏发送自定义模型数据 (发送 cancel 取消输入)'
+      del-lore-last-line: '已设置神器 %name% 的描述'
+      items:
+        edit-display-name:
+          material: NAME_TAG
+          name: '&a编辑物品展示名'
+          lore:
+          - ''
+          - '&a左键 &7| &f手动输入物品展示名'
+        add-del-lore:
+          material: BOOK
+          name: '&a添加/删除一行Lore'
+          lore:
+          - ''
+          - '&a左键 &7| &f在最后一行追加Lore'
+          - '&b右键 &7| &f在指定行插入Lore (0为第一行)'
+          - '&dShift+左键 &7| &f删除最后一行Lore'
+          - '&eShift+右键 &7| &f删除指定行Lore (0为第一行)'
+        set-lore:
+          material: BOOK
+          name: '&a修改一行Lore'
+          lore:
+          - ''
+          - '&a左键 &7| &f修改一行Lore'  
+        set-damage:
+          material: IRON_SWORD
+          name: '&a修改伤害'
+          lore:
+          - '&e当前伤害: &a%damage%'
+          - '&e当前模式: &a%mode%'
+          - ''
+          - '&a左键 &7| &f增加伤害'
+          - '&b右键 &7| &f减少伤害'
+          - '&dShift+左键 &7| &f切换模式'
+          - '&eShift+右键 &7| &f手动输入伤害值'
+        set-armour:
+          material: IRON_CHESTPLATE
+          name: '&a修改护甲值'
+          lore:
+          - '&f当前护甲值: &e%armour%'
+          - '&f当前护甲值表达式: &e%armour_expression%'
+          - ''
+          - '&a左键 &7| &f增加护甲值'
+          - '&b右键 &7| &f减少护甲值'
+          - '&dShift+左键 &7| &f手动输入护甲值'
+          - '&eShift+右键 &7| &f手动输入护甲值表达式'
+        set-material:
+          name: '&a设置物品材质'
+          lore:
+          - ''
+          - '&a指针拖入物品左键 &7| &f填入指针中的物品'
+          - '&b右键 &7| &f手动输入物品ID'
+        change-damage-mode:
+          material: STONE_SWORD
+          name: '&a修改伤害模式'
+          lore:
+          - '&e当前伤害模式: %mode%'
+          - ''
+          - '&a左键 &7| &f修改伤害模式'  
+        change-attribute-mode:
+          name: '&a修改属性更新模式'
+          lore:
+          - '&e当前属性更新模式: %mode%'
+          - ''
+          - '&a左键 &7| &f修改属性更新模式'  
+        enchant:
+          material: ENCHANTED_BOOK
+          name: '&a修改附魔'
+          lore:
+          - '&e当前附魔状态: %mode%'
+          - '&e当前附魔列表:'
+          - '  &b%enchants%'
+          - ''
+          - '&a左键 &7| &f修改附魔状态'
+          - '&a指针拖入物品左键 &7| &f添加/覆盖附魔'
+          - '&b指针拖入物品右键 &7| &f移除附魔 (无论等级)'
+        set-lore-visible:
+          material: LEVER
+          name: '&a修改Lore显示'
+          lore:
+          - '&e显示基础属性: %show_armour_lore%'
+          - '&e显示技能文本: %show_power_lore%'
+          - ''
+          - '&a左键 &7| &f切换基础属性显示'
+          - '&b右键 &7| &f切换技能文本显示'
+          true: '&a是'
+          false: '&c否'
+        set-custom-model:
+          material: LEATHER_CHESTPLATE
+          name: '&a修改自定义模型'
+          lore:
+          - '&e是否开启自定义模型: %switch%'
+          - '&e自定义模型标识: %data%'
+          - ''
+          - '&a左键 &7| &f切换自定义模型开关'
+          - '&b右键 &7| &f手动输入自定义模型标志 (整数)'
+          true: '&a是'
+          false: '&c否'
+        set-ignore-worldguard:
+          material: BARRIER
+          name: '&a是否忽略 WorldGuard'
+          lore:
+          - '&e是否忽略 WorldGuard: %switch%'
+          - ''
+          - '&a左键 &7| &f切换是否忽略 WorldGuard'
+          true: '&a是'
+          false: '&c否'
+        edit-powers:
+          material: NETHER_STAR
+          name: '&a编辑技能'
+          lore:
+          - ''
+          - '&a左键 &7| &f进入技能编辑器，新增或删除技能'
+        edit-item-flags:
+          material: PAPER
+          name: '&a编辑ItemFlag: %flag%'
+          lore:
+          - '&e状态: %value%'
+          - ''
+          - '&a左键 &7| &f切换该Flag的状态'
+          true: '&a开'
+          false: '&c关'
+          flags:
+            HIDE_ATTRIBUTES: '隐藏属性'
+            HIDE_DESTROYS: '隐藏可破坏方块'
+            HIDE_ENCHANTS: '隐藏附魔'
+            HIDE_PLACED_ON: '隐藏可放置方块'
+            HIDE_POTION_EFFECTS: '隐藏药水效果'
+            HIDE_UNBREAKABLE: '隐藏“无法破坏”标签'
+    power-list:
+      title: '&0技能列表 (第%page%页) - %display% &8(%name%)'      
+      items:
+        power:
+          name: '&a%power%'
+          lore:
+          - '&a%description%'
+          - '&7该技能在物品中显示的文本:'
+          - '&a%display%'
+          - '&7&7该技能的属性:'
+          - '&3%key% : &b%value%'
+          - ''
+          - '&a左键 &7| &f编辑该技能'
+          - '&b右键 &7| &f删除该技能'
+          more-items: '&f... 等共 %count% 项'
+        prev-page:
+          material: LIME_STAINED_GLASS_PANE
+          name: '&a上一页'
+          lore: []
+        next-page:
+          material: LIME_STAINED_GLASS_PANE
+          name: '&a下一页'
+          lore: []
+        add-power:
+          material: HOPPER
+          name: '&a添加新技能'
+          lore: []
+        back:
+          material: BARRIER
+          name: '&e返回神器编辑'
+          lore: []
+    add-power:
+      title: '&0添加技能 (第%page%页) %display% &8(%name%)'
+      items:
+        power:
+          name: '&e%display%'
+          lore:
+          - '&a%description%'
+          - ''
+          - '&a左键 &7| &f预添加该技能'
+        prev-page:
+          material: LIME_STAINED_GLASS_PANE
+          name: '&a上一页'
+          lore: []
+        next-page:
+          material: LIME_STAINED_GLASS_PANE
+          name: '&a下一页'
+          lore: []
+        back:
+          material: BARRIER
+          name: '&e返回技能列表'
+          lore: []
+    edit-power:
+      title: '&0%type%技能 %power% - %display% &8(%name%)'
+      title-type-add: '添加'
+      title-type-edit: '编辑'
+      types:
+        number: '(数) '
+        string: '(文本) '
+        enum: '(枚举) '
+        boolean: '(布尔值) '
+        potion: '(药水效果) '
+      prompt:
+        number: '请打开聊天栏发送数值 (发送 cancel 取消输入)'
+        number-1: '输入的数值无效'
+        string: '请打开聊天栏发送文本值 (发送 cancel 取消输入)'
+        string-1: '出现一个意料之外的错误，请查看控制台日志了解详情'
+        enum: '请打开聊天栏发送枚举值 (发送 cancel 取消输入)'
+        enum-1: '出现一个意料之外的错误，请查看控制台日志了解详情'
+        enum-2: '你输入的值对于 %type% 而言是无效的枚举值'
+        potion: '请打开聊天栏发送药水效果英文ID (发送 cancel 取消输入)'
+        potion-1: '出现一个意料之外的错误，请查看控制台日志了解详情'
+        potion-2: '你输入的药水效果无效'
+      items:
+        property:
+          material: ITEM_FRAME
+          material-required: RED_DYE
+          name: '&e%name%'
+          lores:
+            head:
+            - '&a%descirption%'
+            - '&b类型: &e%type%'
+            - '&b值: &e%value%'
+            - ''
+            type-number:
+            - '&a左键 &7| &f数值递增(+1)'
+            - '&b右键 &7| &f数值递减(-1)'
+            - '&7(没有数值时将默认使用0)'
+            - '&aShift+左键 &7| &f手动填入数值'
+            type-string:
+            - '&a左键 &7| &f手动填入文本值'
+            type-enum:
+            - '&a左键 &7| &f更换枚举值'
+            - '&b右键 &7| &f手动填入枚举值'
+            type-boolean:
+            - '&a左键 &7| &f设置值为 true  (开启)'
+            - '&b右键 &7| &f设置值为 false (关闭)'
+            type-potion:
+            - '&a左键 &7| &f选择药水效果'
+            - '&b右键 &7| &f手动填入药水效果'
+            type-unknown:
+            - '&c&m左键&7 | &f该类型的属性暂无修改方法'
+        add-power:
+          material: LIME_DYE
+          name: '&a确认添加该技能到神器'
+          lore: []
+        back:
+          material: BARRIER
+          name: '&e返回'
+          lore: []
+          material-add: BARRIER
+          name-add: '&c取消添加技能'
+          lore-add:
+          - '&f该界面的设置将不会保存'

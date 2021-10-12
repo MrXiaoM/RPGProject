@@ -1,0 +1,9 @@
+name: RPGProject
+main: top.mrxiaom.rpgproject.RPGProject
+version: 1.0
+api-version: 1.13
+author: MrXiaoM
+depend: [RPGItems, CommandPrompter]
+commands:
+  rpgui:
+    descrption: awa
