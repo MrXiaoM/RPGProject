@@ -21,8 +21,8 @@ public abstract class PlayerPrompt extends Prompt implements Runnable{
 	String cancelKey;
 	String response = "";
 	public PlayerPrompt(Player sender, String msg) {
-		super(RPGProject.getInstance().getCmdPrompter(), sender, new LinkedList<>(Lists.newArrayList(msg)), "");
-        this.cancelKey = this.getPlugin().getConfiguration().getString("Cancel-Keyword");
+		super(RPGProject.getInstance().getCmdPrompter(), sender, new LinkedList<>(Lists.newArrayList(msg.replace("%cancel%", RPGProject.getInstance().getCancelKey()))), "");
+        this.cancelKey = RPGProject.getInstance().getCancelKey();
 	}
 	public String getResponse() {
 		return this.response;

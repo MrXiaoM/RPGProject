@@ -21,38 +21,38 @@ lang:
     editor:
       title: '&0编辑 %display% &8(%name%)'
       prompt:
-        display-name: '请打开聊天栏发送神器展示名 (发送 cancel 取消输入)'
+        display-name: '请打开聊天栏发送神器展示名 (发送 %cancel% 取消输入)'
         display-name-1: '已设置神器 %name% 的展示名为 %display%'
         
         # 已设置lore的消息中可用 %content% 代表修改的描述，%line% 代表该描述所在行号
-        add-lore: '请打开聊天栏发送要增加的描述 (发送 cancel 取消输入)'
+        add-lore: '请打开聊天栏发送要增加的描述 (发送 %cancel% 取消输入)'
         add-lore-1: '已设置神器 %name% 的描述'
         
-        insert-lore: '请打开聊天栏发送要插入的行号 (发送 cancel 取消输入)'
+        insert-lore: '请打开聊天栏发送要插入的行号 (发送 %cancel% 取消输入)'
         insert-lore-1: '你输入的行号无效'
-        insert-lore-2: '请打开聊天栏发送要插入的描述内容 (发送 cancel 取消输入)'
+        insert-lore-2: '请打开聊天栏发送要插入的描述内容 (发送 %cancel% 取消输入)'
         insert-lore-3: '已设置神器 %name% 的描述'
         
-        del-lore: '请打开聊天栏发送要删除的行号 (发送 cancel 取消输入)'
+        del-lore: '请打开聊天栏发送要删除的行号 (发送 %cancel% 取消输入)'
         del-lore-1: '你输入的行号无效'
         del-lore-2: '已设置神器 %name% 的描述'
         
-        set-lore: '请打开聊天栏发送要设置的行号 (发送 cancel 取消输入)'
+        set-lore: '请打开聊天栏发送要设置的行号 (发送 %cancel% 取消输入)'
         set-lore-1: '你输入的行号无效'
-        set-lore-2: '请打开聊天栏发送要设置的描述内容 (发送 cancel 取消输入)'
+        set-lore-2: '请打开聊天栏发送要设置的描述内容 (发送 %cancel% 取消输入)'
         set-lore-3: '已设置神器 %name% 的描述'
         
-        set-damage: '请打开聊天栏发送神器伤害 (发送 cancel 取消输入)'
+        set-damage: '请打开聊天栏发送神器伤害 (发送 %cancel% 取消输入)'
         
-        set-armour: '请打开聊天栏发送神器护甲值 (发送 cancel 取消输入)'
+        set-armour: '请打开聊天栏发送神器护甲值 (发送 %cancel% 取消输入)'
         
-        set-armour-expression: '请打开聊天栏发送神器护甲值表达式 (发送 cancel 取消输入)'
+        set-armour-expression: '请打开聊天栏发送神器护甲值表达式 (发送 %cancel% 取消输入)'
         
-        set-material: '请打开聊天栏发送神器物品材质 (发送 cancel 取消输入)'
+        set-material: '请打开聊天栏发送神器物品材质 (发送 %cancel% 取消输入)'
         set-material-1: '你输入的物品材质无效'
         set-material-2: '已设置神器 %name% 的物品材质为 %material%'
         
-        set-custom-model-data: '请打开聊天栏发送自定义模型数据 (发送 cancel 取消输入)'
+        set-custom-model-data: '请打开聊天栏发送自定义模型数据 (发送 %cancel% 取消输入)'
       del-lore-last-line: '已设置神器 %name% 的描述'
       items:
         edit-display-name:
@@ -165,7 +165,7 @@ lang:
           lore:
           - ''
           - '&a左键 &7| &f进入技能编辑器，新增或删除技能'
-        edit-item-flags:
+        edit-item-flag:
           material: PAPER
           name: '&a编辑ItemFlag: %flag%'
           lore:
@@ -244,14 +244,14 @@ lang:
         boolean: '(布尔值) '
         potion: '(药水效果) '
       prompt:
-        number: '请打开聊天栏发送数值 (发送 cancel 取消输入)'
+        number: '请打开聊天栏发送数值 (发送 %cancel% 取消输入)'
         number-1: '输入的数值无效'
-        string: '请打开聊天栏发送文本值 (发送 cancel 取消输入)'
+        string: '请打开聊天栏发送文本值 (发送 %cancel% 取消输入)'
         string-1: '出现一个意料之外的错误，请查看控制台日志了解详情'
-        enum: '请打开聊天栏发送枚举值 (发送 cancel 取消输入)'
+        enum: '请打开聊天栏发送枚举值 (发送 %cancel% 取消输入)'
         enum-1: '出现一个意料之外的错误，请查看控制台日志了解详情'
         enum-2: '你输入的值对于 %type% 而言是无效的枚举值'
-        potion: '请打开聊天栏发送药水效果英文ID (发送 cancel 取消输入)'
+        potion: '请打开聊天栏发送药水效果英文ID (发送 %cancel% 取消输入)'
         potion-1: '出现一个意料之外的错误，请查看控制台日志了解详情'
         potion-2: '你输入的药水效果无效'
       items:

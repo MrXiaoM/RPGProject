@@ -59,6 +59,9 @@ public class RPGProject extends JavaPlugin{
 	public GuiManager getGuiManager() {
 		return this.guiManager;
 	}
+	public String getCancelKey() {
+		return this.cmdPrompter.getConfiguration().getString("Cancel-Keyword");
+	}
 	int power_prop_preview_items = 6;
 	@Override
 	public void onEnable() {
@@ -78,6 +81,7 @@ public class RPGProject extends JavaPlugin{
 
 	@Override
 	public void reloadConfig() {
+		super.reloadConfig();
 		this.power_prop_preview_items = this.getConfig().getInt("power-prop-preview-items", 6);
 		// do sth
 	}
@@ -93,6 +97,7 @@ public class RPGProject extends JavaPlugin{
 		if(!sender.isOp()) return true;
 		Player player = (Player) sender;
 		if(args.length == 1 && args[0].equalsIgnoreCase("reload")) {
+			this.saveDefaultConfig();
 			this.reloadConfig();
 			send(player, i18n("reload"));
 			return true;

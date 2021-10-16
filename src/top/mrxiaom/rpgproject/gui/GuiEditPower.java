@@ -52,7 +52,7 @@ public class GuiEditPower implements IGui{
 				.replace("%type%", this.add ? RPGProject.i18n("gui.edit-power.title-type-add") : RPGProject.i18n("gui.edit-power.title-type-edit"))
 				.replace("%power%", this.power.getName())
 				.replace("%name%", this.rpg.getName())
-				.replace("%display%", this.power.displayName()));
+				.replace("%display%", this.rpg.getDisplayName()));
 		this.updateItems(inv);
 		return inv;
 	}
