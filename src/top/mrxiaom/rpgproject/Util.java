@@ -5,13 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.craftbukkit.v1_15_R1.inventory.CraftItemFactory;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -20,17 +20,8 @@ import com.google.common.collect.Lists;
 import think.rpgitems.I18n;
 import think.rpgitems.RPGItems;
 import think.rpgitems.power.Power;
-import top.mrxiaom.rpgproject.gui.IGui;
 
 public class Util {
-
-	public static void openGuiSync(Player player, IGui gui) {
-		Bukkit.getScheduler().runTask(RPGProject.getInstance(), new Runnable() {
-			public void run() {
-		    	RPGProject.getInstance().getGuiManager().openGui(player, gui);
-			}
-		});
-	}
 
 	public static String i18n(String key, Object... args) {
 		for(String lang : RPGItems.plugin.cfg.enabledLanguages) {
@@ -50,12 +41,24 @@ public class Util {
 		}
 		return "";
 	}
+
+	/**
+	 * RPGItems 全技能图标
+	 * 已将写死的值迁移到配置文件中
+	 * 
+	 * @author MrXiaoM
+	 * */
+	public static Material getPowerIconFromConfig(NamespacedKey power) {
+		return Enums.valueOf(Material.class, RPGProject.i18n("power.materials." + power.getNamespace().toLowerCase() + "." + power.getKey().toLowerCase()).toUpperCase(), Material.BOOK);
+	}
 	
 	/**
 	 * RPGItems 全技能图标
-	 *
+	 * TODO 添加到配置文件中
+	 * 
 	 * @author MrXiaoM
 	 * */
+	@Deprecated
 	public static Material getPowerIcon(Class<? extends Power> power) {
 		if(power.equals(think.rpgitems.power.impl.Airborne.class)) {
 			return Material.ELYTRA;
@@ -278,6 +281,8 @@ public class Util {
 			}
 			im.setLore(l);
 		}
+		im.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
+		im.addItemFlags(ItemFlag.HIDE_POTION_EFFECTS);
 		item.setItemMeta(im);
 		return item;
 	}

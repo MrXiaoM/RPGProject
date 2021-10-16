@@ -17,7 +17,76 @@ lang:
     both: '最大和最小伤害一起修改'
     min: '只修改最小伤害'
     max: '只修改最大伤害'
+  power:
+    # 技能图标
+    # namespace:
+    #   key: MATERIAL
+    # 注意，技能的名称和描述将在 RPGItems 的语言文件中获取
+    materials:
+      rpgitems:
+        airborne: ELYTRA
+        aoe: LINGERING_POTION
+        aoecommand: COMMAND_BLOCK_MINECART
+        aoedamage: WOODEN_SWORD
+        arrows: ARROW
+        attachments: COMPARATOR
+        attract: SLIME_BALL
+        beam: END_ROD
+        cancelbowarrow: BOW
+        charge: GOLDEN_BOOTS
+        command: COMMAND_BLOCK
+        commandhit: COMMAND_BLOCK
+        consume.class: YELLOW_DYE
+        consumehit: YELLOW_DYE
+        criticalhit: IRON_SWORD
+        deathcommand: SKELETON_SKULL
+        deflect: SHIELD
+        delayedcommand: CLOCK
+        dummy: BARRIER
+        economy: GOLD_NUGGET
+        enchantedhit: ENCHANTING_TABLE
+        evaldamage: GOLDEN_SWORD
+        explosion: TNT
+        fire: CAMPFIRE
+        fireball: FIRE_CHARGE
+        flame: LAVA_BUCKET
+        food: COOKED_PORKCHOP
+        forcefield: RED_STAINED_GLASS
+        glove: GHAST_SPAWN_EGG
+        gunfu: CROSSBOW
+        headshot: PLAYER_HEAD
+        ice: ICE
+        knockup: BLAZE_ROD
+        lifesteal: APPLE
+        lightning: IRON_HELMET
+        mount: SADDLE
+        noimmutabletick: DIAMOND_SWORD
+        particlebarrier: RED_DYE
+        particle: CYAN_DYE
+        particletick: LEATHER_CHESTPLATE
+        potionhit: SPLASH_POTION
+        potionself: POTION
+        potiontick: POTION
+        projectile: SNOWBALL
+        pumpkin: CARVED_PUMPKIN
+        rainbow: PINK_WOOL
+        realdamage: DIAMOND_SWORD
+        repair: ANVIL
+        rescue: TOTEM_OF_UNDYING
+        rumble: GOLDEN_AXE
+        scoreboard: NAME_TAG
+        shulkerbullet: PURPLE_SHULKER_BOX
+        skyhook: FISHING_ROD
+        sound: NOTE_BLOCK
+        stuck: CHAINMAIL_CHESTPLATE
+        teleport: ENDER_PEARL
+        throw: OAK_BOAT
+        tippedarrow: TIPPED_ARROW
+        tntcannon: TNT_MINECART
+        torch: TORCH
+        translocator: NETHER_STAR
   gui:
+    # 主编辑器
     editor:
       title: '&0编辑 %display% &8(%name%)'
       prompt:
@@ -51,6 +120,9 @@ lang:
         set-material: '请打开聊天栏发送神器物品材质 (发送 %cancel% 取消输入)'
         set-material-1: '你输入的物品材质无效'
         set-material-2: '已设置神器 %name% 的物品材质为 %material%'
+        
+        set-permission: '请打开聊天栏发送要设置的权限节点 (发送 %cancel% 取消输入)'
+        set-permission-1: '已设置神器 %name% 的权限节点为 %permission%'
         
         set-custom-model-data: '请打开聊天栏发送自定义模型数据 (发送 %cancel% 取消输入)'
       del-lore-last-line: '已设置神器 %name% 的描述'
@@ -91,8 +163,8 @@ lang:
           material: IRON_CHESTPLATE
           name: '&a修改护甲值'
           lore:
-          - '&f当前护甲值: &e%armour%'
-          - '&f当前护甲值表达式: &e%armour_expression%'
+          - '&e当前护甲值: &a%armour%'
+          - '&e当前护甲值表达式: &a%armour_expression%'
           - ''
           - '&a左键 &7| &f增加护甲值'
           - '&b右键 &7| &f减少护甲值'
@@ -108,26 +180,50 @@ lang:
           material: STONE_SWORD
           name: '&a修改伤害模式'
           lore:
-          - '&e当前伤害模式: %mode%'
+          - '&e当前伤害模式: &a%mode%'
           - ''
-          - '&a左键 &7| &f修改伤害模式'  
+          - '&a左键 &7| &f修改伤害模式'
+          modes:
+            ADDITIONAL: '额外'
+            FIXED: '固定'
+            MULTIPLY: '多重'
+            VANILLA: '原版'
         change-attribute-mode:
           name: '&a修改属性更新模式'
           lore:
-          - '&e当前属性更新模式: %mode%'
+          - '&e当前属性更新模式: &a%mode%'
           - ''
-          - '&a左键 &7| &f修改属性更新模式'  
+          - '&a左键 &7| &f修改属性更新模式'
+          modes:
+            FULL_UPDATE: '全部更新'
+            PARTIAL_UPDATE: '部分更新'
         enchant:
           material: ENCHANTED_BOOK
           name: '&a修改附魔'
           lore:
-          - '&e当前附魔状态: %mode%'
+          - '&e当前附魔状态: &a%mode%'
           - '&e当前附魔列表:'
-          - '  &b%enchants%'
+          - '- &b%enchants%'
           - ''
           - '&a左键 &7| &f修改附魔状态'
           - '&a指针拖入物品左键 &7| &f添加/覆盖附魔'
           - '&b指针拖入物品右键 &7| &f移除附魔 (无论等级)'
+          nah: '暂无'
+          modes:
+            ALLOW: '允许附魔'
+            DISALLOW: '不允许附魔'
+            PERMISSION: '需要权限'
+        permission:
+          material: IRON_INGOT
+          name: '&a设置权限'
+          lore:
+          - '&e有权限: %has%'
+          - '&e权限节点: %permission%'
+          - ''
+          - '&a左键 &7| &f切换是否有权限'
+          - '&b右键 &7| &f修改权限节点'
+          true: '&a是'
+          false: '&c否'
         set-lore-visible:
           material: LEVER
           name: '&a修改Lore显示'
@@ -209,7 +305,7 @@ lang:
           name: '&a添加新技能'
           lore: []
         back:
-          material: BARRIER
+          material: RED_STAINED_GLASS_PANE
           name: '&e返回神器编辑'
           lore: []
     add-power:
@@ -218,6 +314,7 @@ lang:
         power:
           name: '&e%display%'
           lore:
+          - '%namespace%:%key%'
           - '&a%description%'
           - ''
           - '&a左键 &7| &f预添加该技能'
@@ -230,7 +327,7 @@ lang:
           name: '&a下一页'
           lore: []
         back:
-          material: BARRIER
+          material: RED_STAINED_GLASS_PANE
           name: '&e返回技能列表'
           lore: []
     edit-power:
@@ -261,7 +358,7 @@ lang:
           name: '&e%name%'
           lores:
             head:
-            - '&a%descirption%'
+            - '&a%description%'
             - '&b类型: &e%type%'
             - '&b值: &e%value%'
             - ''
@@ -283,12 +380,20 @@ lang:
             - '&b右键 &7| &f手动填入药水效果'
             type-unknown:
             - '&c&m左键&7 | &f该类型的属性暂无修改方法'
+        prev-page:
+          material: LIME_STAINED_GLASS_PANE
+          name: '&a上一页'
+          lore: []
+        next-page:
+          material: LIME_STAINED_GLASS_PANE
+          name: '&a下一页'
+          lore: []
         add-power:
           material: LIME_DYE
           name: '&a确认添加该技能到神器'
           lore: []
         back:
-          material: BARRIER
+          material: RED_STAINED_GLASS_PANE
           name: '&e返回'
           lore: []
           material-add: BARRIER

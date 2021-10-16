@@ -95,11 +95,10 @@ public class RPGProject extends JavaPlugin{
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if(!sender.isOp()) return true;
-		Player player = (Player) sender;
 		if(args.length == 1 && args[0].equalsIgnoreCase("reload")) {
 			this.saveDefaultConfig();
 			this.reloadConfig();
-			send(player, i18n("reload"));
+			send(sender, i18n("reload"));
 			return true;
 		}
 		if(args.length == 2 && args[0].equalsIgnoreCase("edit")) {
@@ -107,6 +106,7 @@ public class RPGProject extends JavaPlugin{
 				send(sender, i18n("player-only"));
 				return true;
 			}
+			Player player = (Player) sender;
 			RPGItem rpgItem = this.getItem(args, player);
 			if(rpgItem == null) {
 				send(player, i18n("rpgitem-no-found"));
@@ -117,7 +117,7 @@ public class RPGProject extends JavaPlugin{
 			return true;
 
 		}
-		send(player, i18n_("help"));
+		send(sender, i18n_("help"));
 		return true;
 	}
 

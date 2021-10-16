@@ -77,7 +77,7 @@ public class GuiPowerList implements IGui{
 				
 				List<String> lore = new ArrayList<>();
 				for(String s : RPGProject.i18n_("gui.power-list.items.power.lore")) {
-					s = s.replace("%display%", power.displayText())
+					s = s.replace("%display%", power.displayText() != null ? power.displayText() : "")
 						.replace("%description%", "&a" + Util.i18nEmptyWhenNotFound("properties." + power.getNamespacedKey().getKey() + ".main_description"));
 					if(s.contains("%key%") && s.contains("%value%")) {
 						int l = 0;
@@ -98,7 +98,7 @@ public class GuiPowerList implements IGui{
 					}
 					lore.add(s);
 				}
-				items.put(k, Util.buildItem(Util.getPowerIcon(power.getClass()),
+				items.put(k, Util.buildItem(Util.getPowerIconFromConfig(power.getNamespacedKey()),
 					"&e" + Util.i18n("properties." + power.getNamespacedKey().getKey() + ".main_name"),
 					lore));
 				k++;
@@ -110,15 +110,15 @@ public class GuiPowerList implements IGui{
 					RPGProject.i18n("gui.power-list.items.prev-page.name"),
 					RPGProject.i18n_("gui.power-list.items.prev-page.lore", Lists.newArrayList(
 							new Pair<>("%page%", String.valueOf(this.page)),
-							new Pair<>("%max_page%", String.valueOf((int)(this.rpg.getPowers().size() / 45 + 1)))
+							new Pair<>("%max_page%", String.valueOf((int)Math.ceil(this.rpg.getPowers().size() / 45.0D)))
 					))));
 		}
-		if(this.page + 1 < this.rpg.getPowers().size() / 45 + 1) {
+		if(this.page < (double)(this.rpg.getPowers().size() / 45.0D)) {
 			items.put(53, Util.buildItem(Enums.valueOf(Material.class, RPGProject.i18n("gui.power-list.items.next-page.material"), Material.LIME_STAINED_GLASS_PANE), 
 					RPGProject.i18n("gui.power-list.items.next-page.name"),
 					RPGProject.i18n_("gui.power-list.items.next-page.lore", Lists.newArrayList(
 							new Pair<>("%page%", String.valueOf(this.page)),
-							new Pair<>("%max_page%", String.valueOf((int)(this.rpg.getPowers().size() / 45 + 1)))
+							new Pair<>("%max_page%", String.valueOf((int)Math.ceil(this.rpg.getPowers().size() / 45.0D)))
 					))));
 		}
 		items.put(47, Util.buildItem(Enums.valueOf(Material.class, RPGProject.i18n("gui.power-list.items.add-power.material"), Material.HOPPER), 
@@ -162,18 +162,18 @@ public class GuiPowerList implements IGui{
 			}
 		}
 		// 上一页
-		if(clickedSlot == 43 && this.page - 1 > 0) {
+		if(clickedSlot == 45 && this.page - 1 > 0) {
 			this.page--;
 		}
 		// 下一页
-		if(clickedSlot == 43 && this.page + 1 < this.rpg.getPowers().size() / 45 + 1) {
+		if(clickedSlot == 53 && this.page < (double)(this.rpg.getPowers().size() / 45.0D)) {
 			this.page++;
 		}
 		// 新建技能
 		if(clickedSlot == 47) {
 			this.close = true;
 			this.remove = false;
-			IGui gui = new GuiNewPower(player.getName(), this.rpg, 1);
+			IGui gui = new GuiAddPower(player.getName(), this.rpg, 1);
 			player.closeInventory();
 			RPGProject.getInstance().getGuiManager().openGui(player, gui);
 			return;

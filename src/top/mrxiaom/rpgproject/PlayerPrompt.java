@@ -1,15 +1,18 @@
 package top.mrxiaom.rpgproject;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.LinkedList;
 import java.util.concurrent.ExecutorService;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import com.cyr1en.cp.listener.Prompt;
+import com.cyr1en.cp.PromptRegistry;
 import com.google.common.collect.Lists;
 
 /**
@@ -37,21 +40,25 @@ public abstract class PlayerPrompt extends Prompt implements Runnable{
             this.cancel();
         } else {
         	this.response = event.getMessage();
-        	this.run();
+        	Bukkit.getScheduler().runTask(RPGProject.getInstance(), this::run);
             this.shutdownScheduler();
+            PromptRegistry.deregisterPrompt(this);
         }
         event.setCancelled(true);
     }
 	private void cancel() {
 		try {
-			Prompt.class.getDeclaredMethod("cancel").invoke(this);
+			Method m = Prompt.class.getDeclaredMethod("cancel");
+			m.setAccessible(true);
+			m.invoke(this);
 		}catch(Throwable t) {
 			t.printStackTrace();
 		}
 	}
 	private void shutdownScheduler() {
 		try {
-			Field field =Prompt.class.getDeclaredField("scheduler");
+			Field field = Prompt.class.getDeclaredField("scheduler");
+			field.setAccessible(true);
 			Object obj = field.get(this);
 			ExecutorService.class.getDeclaredMethod("shutdownNow").invoke(obj);
 		}catch(Throwable t) {

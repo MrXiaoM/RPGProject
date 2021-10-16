@@ -36,6 +36,7 @@ public class GuiEditPower implements IGui{
 	RPGItem rpg;
 	Power power;
 	boolean add;
+	int page = 1;
 	int row = 6;
 	boolean close = false;
 	boolean remove = true;
@@ -58,6 +59,7 @@ public class GuiEditPower implements IGui{
 	}
 
 	private void updateItems(Inventory inv) {
+		inv.clear();
 		Map<Integer, ItemStack> items = this.getGUIItems();
 		for(int slot : items.keySet()) {
 			inv.setItem(slot, items.get(slot));
@@ -65,6 +67,7 @@ public class GuiEditPower implements IGui{
 	}
 
 	private void updateItems(InventoryView inv) {
+		inv.getTopInventory().clear();
 		Map<Integer, ItemStack> items = this.getGUIItems();
 		for(int slot : items.keySet()) {
 			inv.setItem(slot, items.get(slot));
@@ -107,39 +110,60 @@ public class GuiEditPower implements IGui{
 		Map<Integer, ItemStack> items = new HashMap<>();
 		this.names.clear();
 		int i = 0;
+		int j = 45 * this.page;
+		int k = 0;
 		Map<String, Pair<Method, PropertyInstance>> props = PowerManager.getProperties(this.power.getNamespacedKey());
 		for(String name : props.keySet()) {
-			PropertyInstance prop = props.get(name).getValue();
-			String value = "&7暂无";
-			try{
-				Object v = prop.field().get(this.power);
-				if(v != null) {
-					if(v instanceof Enum) value = ((Enum<?>) v).name();
-					else value = v.toString();
+			if(i >= j - 45 && i < j) {
+				PropertyInstance prop = props.get(name).getValue();
+				String value = "&7暂无";
+				try{
+					Object v = prop.field().get(this.power);
+					if(v != null) {
+						if(v instanceof Enum) value = ((Enum<?>) v).name();
+						else value = v.toString();
+					}
+				}catch(Throwable t) {
+					// 收声
 				}
-			}catch(Throwable t) {
-				// 收声
+				List<String> lore = RPGProject.i18n_("gui.edit-power.items.property.lores.head", Lists.newArrayList(
+						new Pair<>("%description%", Util.i18nEmptyWhenNotFound("properties." + this.power.getNamespacedKey().getKey() + "." + name)),
+						new Pair<>("%type%", this.getType(prop.field().getType())),
+						new Pair<>("%value%", value)
+						));
+				lore.addAll(this.getActionLore(prop.field().getType()));
+				items.put(k, Util.buildItem(prop.required() ?
+						Enums.valueOf(Material.class, RPGProject.i18n("gui.edit-power.items.property.material-required") ,Material.RED_DYE) :
+						Enums.valueOf(Material.class, RPGProject.i18n("gui.edit-power.items.property.material") ,Material.ITEM_FRAME),
+						RPGProject.i18n("gui.edit-power.items.property.name").replace("%name%", name),
+						lore));
+				this.names.put(k, new Pair<>(name, prop));
+				k++;
 			}
-			List<String> lore = RPGProject.i18n_("gui.edit-power.items.property.lores.head", Lists.newArrayList(
-					new Pair<>("%description%", Util.i18nEmptyWhenNotFound("properties." + this.power.getNamespacedKey().getKey() + "." + name)),
-					new Pair<>("%type%", this.getType(prop.field().getType())),
-					new Pair<>("%value%", value)
-					));
-			lore.addAll(this.getActionLore(prop.field().getType()));
-			items.put(i, Util.buildItem(prop.required() ?
-					Enums.valueOf(Material.class, RPGProject.i18n("gui.edit-power.items.property.material-required") ,Material.RED_DYE) :
-					Enums.valueOf(Material.class, RPGProject.i18n("gui.edit-power.items.property.material") ,Material.ITEM_FRAME),
-					RPGProject.i18n("gui.edit-power.items.property.name").replace("%name%", name),
-					lore));
-			this.names.put(i, new Pair<>(name, prop));
 			i++;
 		}
+		if(this.page - 1 > 0) {
+			items.put(45, Util.buildItem(Enums.valueOf(Material.class, RPGProject.i18n("gui.edit-power.items.prev-page.material"), Material.LIME_STAINED_GLASS_PANE), 
+					RPGProject.i18n("gui.edit-power.items.prev-page.name"),
+					RPGProject.i18n_("gui.edit-power.items.prev-page.lore", Lists.newArrayList(
+							new Pair<>("%page%", String.valueOf(this.page)),
+							new Pair<>("%max_page%", String.valueOf((int)Math.ceil(props.size() / 45.0D)))
+					))));
+		}
+		if(this.page < (double)(props.size() / 45.0D)) {
+			items.put(53, Util.buildItem(Enums.valueOf(Material.class, RPGProject.i18n("gui.edit-power.items.next-page.material"), Material.LIME_STAINED_GLASS_PANE), 
+					RPGProject.i18n("gui.edit-power.items.next-page.name"),
+					RPGProject.i18n_("gui.edit-power.items.next-page.lore", Lists.newArrayList(
+							new Pair<>("%page%", String.valueOf(this.page)),
+							new Pair<>("%max_page%", String.valueOf((int)Math.ceil(props.size() / 45.0D)))
+					))));
+		}
 		if(this.add) {
-			items.put(52, Util.buildItem(Enums.valueOf(Material.class, RPGProject.i18n("gui.edit-power.items.add-power.material"), Material.LIME_DYE), 
+			items.put(47, Util.buildItem(Enums.valueOf(Material.class, RPGProject.i18n("gui.edit-power.items.add-power.material"), Material.LIME_DYE), 
 					RPGProject.i18n("gui.edit-power.items.add-power.name"),
 					RPGProject.i18n_("gui.edit-power.items.add-power.lore")));
 		}
-		items.put(53, Util.buildItem(Enums.valueOf(Material.class, RPGProject.i18n("gui.edit-power.items.back.material" + (this.add ? "-add" : "")), Material.BARRIER),
+		items.put(49, Util.buildItem(Enums.valueOf(Material.class, RPGProject.i18n("gui.edit-power.items.back.material" + (this.add ? "-add" : "")), Material.BARRIER),
 				RPGProject.i18n("gui.edit-power.items.back.name" + (this.add ? "-add" : "")),
 				RPGProject.i18n_("gui.edit-power.items.back.lore" + (this.add ? "-add" : ""))));
 
@@ -196,7 +220,7 @@ public class GuiEditPower implements IGui{
 						    		}
 						    	}
 					    		GuiEditPower.this.close = false;
-						    	Util.openGuiSync(player, GuiEditPower.this);
+						    	RPGProject.getInstance().getGuiManager().openGui(player, new GuiEditPower(handlePlayer, rpg, power, add));
 					    	}
 					    });
 					    this.close = true;
@@ -252,7 +276,7 @@ public class GuiEditPower implements IGui{
 			    				t.printStackTrace();
 			    			}
 			    			GuiEditPower.this.close = false;
-					    	Util.openGuiSync(player, GuiEditPower.this);
+					    	RPGProject.getInstance().getGuiManager().openGui(player, new GuiEditPower(handlePlayer, rpg, power, add));
 			    		}
 			    	});
 			    	this.close = true;
@@ -293,7 +317,7 @@ public class GuiEditPower implements IGui{
 				    				RPGProject.send(player, RPGProject.i18n("gui.edit-power.prompt.enum-2").replace("%type%", cls.getSimpleName()));
 				    			}
 				    			GuiEditPower.this.close = false;
-						    	Util.openGuiSync(player, GuiEditPower.this);
+						    	RPGProject.getInstance().getGuiManager().openGui(player, new GuiEditPower(handlePlayer, rpg, power, add));
 				    		}
 				    	});
 				    	this.close = true;
@@ -347,7 +371,7 @@ public class GuiEditPower implements IGui{
 				    				RPGProject.send(player, RPGProject.i18n("gui.edit-power.prompt.potion-2"));
 				    			}
 				    			GuiEditPower.this.close = false;
-						    	Util.openGuiSync(player, GuiEditPower.this);
+						    	RPGProject.getInstance().getGuiManager().openGui(player, new GuiEditPower(handlePlayer, rpg, power, add));
 				    		}
 				    	});
 				    	this.close = true;
@@ -358,8 +382,16 @@ public class GuiEditPower implements IGui{
 				}
 			}
 		}
+		// 上一页
+		if(clickedSlot == 45 && this.page - 1 > 0) {
+			this.page--;
+		}
+		// 下一页
+		if(clickedSlot == 53 && this.page < (double)(PowerManager.getProperties(this.power.getNamespacedKey()).size() / 45.0D)) {
+			this.page++;
+		}
 		// 新建技能
-		if(this.add && clickedSlot == 52) {
+		if(this.add && clickedSlot == 47) {
 			this.power.setItem(this.rpg);
             this.rpg.addPower(this.power.getNamespacedKey(), this.power);
             ItemManager.refreshItem();
@@ -372,10 +404,10 @@ public class GuiEditPower implements IGui{
 			return;
 		}
 		// 返回技能列表菜单
-		if(clickedSlot == 53) {
+		if(clickedSlot == 49) {
 			this.close = true;
 			this.remove = false;
-			IGui gui = this.add ? new GuiNewPower(player.getName(), this.rpg, 1) : new GuiPowerList(player.getName(), this.rpg, 1);
+			IGui gui = this.add ? new GuiAddPower(player.getName(), this.rpg, 1) : new GuiPowerList(player.getName(), this.rpg, 1);
 			player.closeInventory();
 			RPGProject.getInstance().getGuiManager().openGui(player, gui);
 			return;
@@ -386,7 +418,7 @@ public class GuiEditPower implements IGui{
 	@Override
 	public boolean onClose(Player player, InventoryView inv, InventoryCloseEvent event) {
 		if(!this.close) {
-			IGui gui = this.add ? new GuiNewPower(player.getName(), this.rpg, 1) : new GuiPowerList(player.getName(), this.rpg, 1);
+			IGui gui = this.add ? new GuiAddPower(player.getName(), this.rpg, 1) : new GuiPowerList(player.getName(), this.rpg, 1);
 			RPGProject.getInstance().getGuiManager().openGui(player, gui);
 		}
 		return this.remove;
