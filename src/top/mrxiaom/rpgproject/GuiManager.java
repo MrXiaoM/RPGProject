@@ -32,13 +32,10 @@ public class GuiManager implements Listener{
 	}
 
 	public InventoryView openGui(Player player, IGui gui) {
-		System.out.println("open");
 		if(this.playerGui.containsKey(player.getName())) {
 			this.playerGui.remove(player.getName());
-			System.out.println("remove o");
 		}
 		this.playerGui.put(player.getName(), gui);
-		//System.out.println("put o");
 		return player.openInventory(gui.createGui(player));
 	}
 
@@ -47,7 +44,6 @@ public class GuiManager implements Listener{
 		if(!(event.getWhoClicked() instanceof Player)) return;
 		Player player = (Player) event.getWhoClicked();
 		if(this.playerGui.containsKey(player.getName())) {
-			//System.out.println("玩家 " + player.getName() + " 点击GUI " + this.playerGui.get(player.getName()));
 			this.playerGui.get(player.getName()).onClick(player, event.getView().getCursor(), event.getRawSlot(), event.getView(), event);
 		}
 	}
@@ -60,7 +56,6 @@ public class GuiManager implements Listener{
 			IGui gui = this.playerGui.get(player.getName());
 			if(gui.onClose(player, event.getView(), event)) {
 				this.playerGui.remove(player.getName());
-				System.out.println("remove c");
 			}
 		}
 	}

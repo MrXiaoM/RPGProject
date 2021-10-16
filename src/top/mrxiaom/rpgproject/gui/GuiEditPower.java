@@ -139,9 +139,9 @@ public class GuiEditPower implements IGui{
 					RPGProject.i18n("gui.edit-power.items.add-power.name"),
 					RPGProject.i18n_("gui.edit-power.items.add-power.lore")));
 		}
-		items.put(53, Util.buildItem(Enums.valueOf(Material.class, RPGProject.i18n("gui.edit-power.items.back.material-" + (this.add ? "add" : "")), Material.BARRIER),
-				RPGProject.i18n("gui.edit-power.items.back.name-" + (this.add ? "add" : "")),
-				RPGProject.i18n_("gui.edit-power.items.back.lore-" + (this.add ? "add" : ""))));
+		items.put(53, Util.buildItem(Enums.valueOf(Material.class, RPGProject.i18n("gui.edit-power.items.back.material" + (this.add ? "-add" : "")), Material.BARRIER),
+				RPGProject.i18n("gui.edit-power.items.back.name" + (this.add ? "-add" : "")),
+				RPGProject.i18n_("gui.edit-power.items.back.lore" + (this.add ? "-add" : ""))));
 
 		return items;
 	}
@@ -359,7 +359,7 @@ public class GuiEditPower implements IGui{
 			}
 		}
 		// 新建技能
-		if(this.add && clickedSlot == 47) {
+		if(this.add && clickedSlot == 52) {
 			this.power.setItem(this.rpg);
             this.rpg.addPower(this.power.getNamespacedKey(), this.power);
             ItemManager.refreshItem();
@@ -372,7 +372,7 @@ public class GuiEditPower implements IGui{
 			return;
 		}
 		// 返回技能列表菜单
-		if(clickedSlot == 49) {
+		if(clickedSlot == 53) {
 			this.close = true;
 			this.remove = false;
 			IGui gui = this.add ? new GuiNewPower(player.getName(), this.rpg, 1) : new GuiPowerList(player.getName(), this.rpg, 1);
