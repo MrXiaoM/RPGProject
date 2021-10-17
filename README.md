@@ -1,6 +1,6 @@
 # RPGProject
 
-[![Release | 1.0](https://img.shields.io/badge/Release-no%20release%20now-orange)](https://github.com/DoomsdaySociety/RPGProject/releases)[![](https://img.shields.io/badge/Minecraft-1.15--%3F-blue)]()
+[![Release | 1.0](https://img.shields.io/badge/Release-1.2--aplha-orange)](https://github.com/DoomsdaySociety/RPGProject/releases) [![](https://img.shields.io/badge/Minecraft-1.15--%3F-blue)]() [![](https://img.shields.io/badge/mcbbs-thread-green)](https://www.mcbbs.net/thread-1268897-1-1.html)
 
 在游戏内编辑 RPGItems 神器吧
 
@@ -8,7 +8,7 @@
 
 **CommandPrompter 插件虽然最高到 1.15，但是在 Reviews 里用户反映 1.16 和 1.17 都可用**
 
-该插件编辑技能部分暂未完善，完善后将在 mcbbs 账号 [MrXiaoM](https://www.mcbbs.net/home.php?mod=space&uid=2746803) 发布
+该插件编辑技能部分暂未完善，本插件发布贴请见 [mcbbs](https://www.mcbbs.net/thread-1268897-1-1.html)
 
 ## 前置插件
 
