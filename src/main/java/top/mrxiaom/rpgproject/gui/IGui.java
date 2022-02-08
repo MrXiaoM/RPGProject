@@ -8,8 +8,10 @@ import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 
 public interface IGui {
-	Inventory createGui(Player player);
+    Inventory createGui(Player player);
 
-	void onClick(final Player player, final ItemStack clickedItem, final int clickedSlot, final InventoryView inv, final InventoryClickEvent event);
+    void onClick(final Player player, final ItemStack clickedItem, final int clickedSlot, final InventoryView inv,
+                 final InventoryClickEvent event);
 
-	boolean onClose(final Player player, final InventoryView inv, final InventoryCloseEvent event);}
+    boolean onClose(final Player player, final InventoryView inv, final InventoryCloseEvent event);
+}

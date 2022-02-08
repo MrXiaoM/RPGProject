@@ -1,12 +1,12 @@
 # RPGProject
 
-[![Release | 1.0](https://img.shields.io/badge/Release-1.2--aplha-orange)](https://github.com/DoomsdaySociety/RPGProject/releases) [![](https://img.shields.io/badge/Minecraft-1.15--%3F-blue)]() [![](https://img.shields.io/badge/mcbbs-thread-green)](https://www.mcbbs.net/thread-1268897-1-1.html)
+[![Release | 1.3](https://img.shields.io/badge/Release-1.3--beta-yellow)](https://github.com/DoomsdaySociety/RPGProject/releases) [![](https://img.shields.io/badge/Minecraft-1.15--%3F-blue)]() [![](https://img.shields.io/badge/mcbbs-thread-green)](https://www.mcbbs.net/thread-1268897-1-1.html)
 
 在游戏内编辑 RPGItems 神器吧
 
 **目前 RPGProject 仅在1.15测试通过，不一定兼容 RPGItems 1.16 和 RPGItems 1.17，如果 更高版本的 RPGItems 接口没改的话是兼容的。**
 
-**CommandPrompter 插件虽然最高到 1.15，但是在 Reviews 里用户反映 1.16 和 1.17 都可用**
+**由于 CommandPrompter 接口变动，现已自行实现参数补全功能，弃用前置 CommandPrompter**
 
 该插件编辑技能部分暂未完善，本插件发布贴请见 [mcbbs](https://www.mcbbs.net/thread-1268897-1-1.html)
 
@@ -22,13 +22,19 @@
   * WorldGuard (可选): [BukkitDev](https://dev.bukkit.org/projects/worldguard/files) | [mcbbs](https://www.mcbbs.net/thread-461468-1-1.html)
   * NyaaUtils (可选): [Nyaacat Jenkins](https://ci.nyaacat.com/job/NyaaUtils/)
 
-* CommandPrompter: [spigotmc](https://www.spigotmc.org/resources/commandprompter.47772) | [mcbbs](https://www.mcbbs.net/thread-941898-1-1.html)
+* ProtocolLib: [spigotmc](https://www.spigotmc.org/resources/protocollib.1997) | [mcbbs](https://www.mcbbs.net/thread-922525-1-1.html)
 
 ## 用法
 
 `/rpgui edit 神器ID` - 打开GUI来编辑神器
 
 `/rpgui reload` - 重载配置文件
+
+## 编译
+
+```
+./gradlew clean build
+```
 
 ## 开源许可证
 
@@ -50,7 +56,7 @@ must be made available.
 
 [NyaaCat/RPGItems-reloaded](https://github.com/NyaaCat/RPGitems-reloaded/tree/1.15) (branch 1.15)
 
-[CyR1en/CommandPrompter](https://github.com/CyR1en/CommandPrompter)
+[dmulloy2/ProtocolLib](https://github.com/dmulloy2/ProtocolLib)
 
 [Spigot](https://hub.spigotmc.org/jenkins/job/BuildTools/) (1.15.2)
 

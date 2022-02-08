@@ -1,9 +1,9 @@
 name: RPGProject
 main: top.mrxiaom.rpgproject.RPGProject
-version: 1.2-alpha
+version: '${version}'
 api-version: 1.13
 author: MrXiaoM
-depend: [RPGItems, CommandPrompter]
+depend: [ NyaaCore, RPGItems, ProtocolLib ]
 commands:
   rpgui:
     descrption: awa
