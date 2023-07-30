@@ -1,6 +1,5 @@
 package top.mrxiaom.rpgproject;
 
-import cat.nyaa.nyaacore.Pair;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
 import com.google.common.collect.Lists;
@@ -9,7 +8,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.java.JavaPlugin;
+import think.rpgitems.RPGItems;
 import think.rpgitems.item.ItemManager;
 import think.rpgitems.item.RPGItem;
 import top.mrxiaom.rpgproject.gui.GuiEditor;
@@ -17,6 +18,7 @@ import top.mrxiaom.rpgproject.gui.IGui;
 import top.mrxiaom.rpgproject.prompt.PromptManager;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class RPGProject extends JavaPlugin {
@@ -107,10 +109,10 @@ public class RPGProject extends JavaPlugin {
     }
 
     private RPGItem getItem(String[] args, Player player) {
-        if (args.length == 2) {
+        if (args.length >= 2) {
             return ItemManager.getItem(args[1]).orElse(null);
         }
-        return ItemManager.toRPGItemByMeta(player.getInventory().getItemInMainHand()).orElse(null);
+        return ItemManager.toRPGItem(player.getInventory().getItemInMainHand()).orElse(null);
     }
 
     @Override
@@ -123,7 +125,7 @@ public class RPGProject extends JavaPlugin {
             send(sender, i18n("reload"));
             return true;
         }
-        if (args.length == 2 && args[0].equalsIgnoreCase("edit")) {
+        if (args.length >= 1 && args[0].equalsIgnoreCase("edit")) {
             if (!(sender instanceof Player)) {
                 send(sender, i18n("player-only"));
                 return true;
@@ -152,9 +154,10 @@ public class RPGProject extends JavaPlugin {
             if ("reload".startsWith(args[0].toLowerCase()))
                 result.add("reload");
         } else if (args.length == 2 && args[0].equalsIgnoreCase("edit")) {
-            for (String name : ItemManager.itemNames()) {
-                if (name.toLowerCase().startsWith(args[1].toLowerCase())) {
-                    result.add(name);
+            Collection<RPGItem> items = ItemManager.items();
+            for (RPGItem item : items) {
+                if (item.getName().toLowerCase().startsWith(args[1].toLowerCase())) {
+                    result.add(item.getName() + " " + item.getDisplayName().replaceAll("&.|§.", ""));
                 }
             }
         }

@@ -1,6 +1,5 @@
 package top.mrxiaom.rpgproject.gui;
 
-import cat.nyaa.nyaacore.Pair;
 import com.google.common.collect.Lists;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -20,6 +19,7 @@ import think.rpgitems.item.RPGItem.AttributeMode;
 import think.rpgitems.item.RPGItem.DamageMode;
 import think.rpgitems.item.RPGItem.EnchantMode;
 import top.mrxiaom.rpgproject.Enums;
+import top.mrxiaom.rpgproject.Pair;
 import top.mrxiaom.rpgproject.RPGProject;
 import top.mrxiaom.rpgproject.Util;
 import top.mrxiaom.rpgproject.prompt.BasicPrompt;
@@ -771,20 +771,20 @@ public class GuiEditor implements IGui {
                                 RPGProject.i18n("gui.editor.items.set-damage.name"),
                                 RPGProject.i18n_("gui.editor.items.set-damage.lore",
                                         Lists.newArrayList(
-                                                new Pair<>("%damage%",
+                                                Pair.of("%damage%",
                                                         this.rpg.getDamageMin() == this.rpg.getDamageMax()
                                                                 ? String.valueOf(this.rpg.getDamageMax())
                                                                 : (this.rpg.getDamageMin() + "-"
                                                                 + this.rpg.getDamageMax())),
-                                                new Pair<>("%mode%", this.damageChangeMode.getDisplay())))));
+                                                Pair.of("%mode%", this.damageChangeMode.getDisplay())))));
         items.put(5,
                 Util.buildItem(
                         Enums.valueOf(Material.class, RPGProject.i18n("gui.editor.items.set-armour.material"),
                                 Material.IRON_CHESTPLATE),
                         RPGProject.i18n("gui.editor.items.set-armour.name"),
                         RPGProject.i18n_("gui.editor.items.set-armour.lore",
-                                Lists.newArrayList(new Pair<>("%armour%", String.valueOf(this.rpg.getArmour())),
-                                        new Pair<>("%armour_expression%", this.rpg.getArmourExpression())))));
+                                Lists.newArrayList(Pair.of("%armour%", String.valueOf(this.rpg.getArmour())),
+                                        Pair.of("%armour_expression%", this.rpg.getArmourExpression())))));
         items.put(6, Util.buildItem(this.rpg.getItem(), RPGProject.i18n("gui.editor.items.set-material.name"),
                 RPGProject.i18n_("gui.editor.items.set-material.lore")));
         items.put(7,
@@ -792,7 +792,7 @@ public class GuiEditor implements IGui {
                                 RPGProject.i18n("gui.editor.items.change-damage-mode.material"), Material.STONE_SWORD),
                         RPGProject.i18n("gui.editor.items.change-damage-mode.name"),
                         RPGProject.i18n_("gui.editor.items.change-damage-mode.lore",
-                                Lists.newArrayList(new Pair<>("%mode%",
+                                Lists.newArrayList(Pair.of("%mode%",
                                         RPGProject.i18n("gui.editor.items.change-damage-mode.modes."
                                                 + this.rpg.getDamageMode().name().toUpperCase()))))));
         items.put(8,
@@ -800,7 +800,7 @@ public class GuiEditor implements IGui {
                                 RPGProject.i18n("gui.editor.items.change-attribute-mode.material"), Material.GOLDEN_APPLE),
                         RPGProject.i18n("gui.editor.items.change-attribute-mode.name"),
                         RPGProject.i18n_("gui.editor.items.change-attribute-mode.lore",
-                                Lists.newArrayList(new Pair<>("%mode%",
+                                Lists.newArrayList(Pair.of("%mode%",
                                         RPGProject.i18n("gui.editor.items.change-attribute-mode.modes."
                                                 + this.rpg.getAttributeMode().name().toUpperCase()))))));
         items.put(9,
@@ -814,19 +814,19 @@ public class GuiEditor implements IGui {
                                 .i18n("gui.editor.items.permission.material"), Material.IRON_INGOT),
                         RPGProject.i18n("gui.editor.items.permission.name"),
                         RPGProject.i18n_("gui.editor.items.permission.lore", Lists.newArrayList(
-                                new Pair<>("%has%",
+                                Pair.of("%has%",
                                         this.rpg.isHasPermission() ? RPGProject.i18n("gui.editor.items.permission.true")
                                                 : RPGProject.i18n("gui.editor.items.permission.false")),
-                                new Pair<>("%permission%", this.rpg.getPermission())))));
+                                Pair.of("%permission%", this.rpg.getPermission())))));
         items.put(11, Util.buildItem(
                 Enums.valueOf(
                         Material.class, RPGProject.i18n("gui.editor.items.set-lore-visible.material"), Material.LEVER),
                 RPGProject.i18n("gui.editor.items.set-lore-visible.name"),
                 RPGProject.i18n_("gui.editor.items.set-lore-visible.lore", Lists.newArrayList(
-                        new Pair<>("%show_armour_lore%",
+                        Pair.of("%show_armour_lore%",
                                 this.rpg.isShowArmourLore() ? RPGProject.i18n("gui.editor.items.set-lore-visible.true")
                                         : RPGProject.i18n("gui.editor.items.set-lore-visible.false")),
-                        new Pair<>("%show_power_lore%",
+                        Pair.of("%show_power_lore%",
                                 this.rpg.isShowPowerText() ? RPGProject.i18n("gui.editor.items.set-lore-visible.true")
                                         : RPGProject.i18n("gui.editor.items.set-lore-visible.false"))))));
         items.put(12, Util.buildItem(
@@ -834,10 +834,10 @@ public class GuiEditor implements IGui {
                         .i18n("gui.editor.items.set-custom-model.material"), Material.LEATHER_CHESTPLATE),
                 RPGProject.i18n("gui.editor.items.set-custom-model.name"),
                 RPGProject.i18n_("gui.editor.items.set-custom-model.lore", Lists.newArrayList(
-                        new Pair<>("%switch%",
+                        Pair.of("%switch%",
                                 this.rpg.isCustomItemModel() ? RPGProject.i18n("gui.editor.items.set-custom-model.true")
                                         : RPGProject.i18n("gui.editor.items.set-custom-model.false")),
-                        new Pair<>("%data%", String.valueOf(this.rpg.getCustomModelData()))))));
+                        Pair.of("%data%", String.valueOf(this.rpg.getCustomModelData()))))));
         items.put(13,
                 Util.buildItem(
                         Enums.valueOf(Material.class,
@@ -845,7 +845,7 @@ public class GuiEditor implements IGui {
                         RPGProject.i18n("gui.editor.items.set-ignore-worldguard.name"),
                         RPGProject
                                 .i18n_("gui.editor.items.set-ignore-worldguard.lore",
-                                        Lists.newArrayList(new Pair<>("%switch%", this.rpg.isIgnoreWorldGuard()
+                                        Lists.newArrayList(Pair.of("%switch%", this.rpg.isIgnoreWorldGuard()
                                                 ? RPGProject.i18n("gui.editor.items.set-ignore-worldguard.true")
                                                 : RPGProject.i18n("gui.editor.items.set-ignore-worldguard.false"))))));
         items.put(14,
@@ -861,7 +861,7 @@ public class GuiEditor implements IGui {
                         RPGProject.i18n("gui.editor.items.edit-item-flag.name").replace("%flag%",
                                 RPGProject.i18n("gui.editor.items.edit-item-flag.flags.HIDE_ATTRIBUTES")),
                         RPGProject.i18n_("gui.editor.items.edit-item-flag.lore",
-                                Lists.newArrayList(new Pair<>("%value%",
+                                Lists.newArrayList(Pair.of("%value%",
                                         this.rpg.getItemFlags().contains(ItemFlag.HIDE_ATTRIBUTES)
                                                 ? RPGProject.i18n("gui.editor.items.edit-item-flag.true")
                                                 : RPGProject.i18n("gui.editor.items.edit-item-flag.false"))))));
@@ -872,7 +872,7 @@ public class GuiEditor implements IGui {
                         RPGProject.i18n("gui.editor.items.edit-item-flag.name").replace("%flag%",
                                 RPGProject.i18n("gui.editor.items.edit-item-flag.flags.HIDE_DESTROYS")),
                         RPGProject.i18n_("gui.editor.items.edit-item-flag.lore",
-                                Lists.newArrayList(new Pair<>("%value%",
+                                Lists.newArrayList(Pair.of("%value%",
                                         this.rpg.getItemFlags().contains(ItemFlag.HIDE_DESTROYS)
                                                 ? RPGProject.i18n("gui.editor.items.edit-item-flag.true")
                                                 : RPGProject.i18n("gui.editor.items.edit-item-flag.false"))))));
@@ -883,7 +883,7 @@ public class GuiEditor implements IGui {
                         RPGProject.i18n("gui.editor.items.edit-item-flag.name").replace("%flag%",
                                 RPGProject.i18n("gui.editor.items.edit-item-flag.flags.HIDE_ENCHANTS")),
                         RPGProject.i18n_("gui.editor.items.edit-item-flag.lore",
-                                Lists.newArrayList(new Pair<>("%value%",
+                                Lists.newArrayList(Pair.of("%value%",
                                         this.rpg.getItemFlags().contains(ItemFlag.HIDE_ENCHANTS)
                                                 ? RPGProject.i18n("gui.editor.items.edit-item-flag.true")
                                                 : RPGProject.i18n("gui.editor.items.edit-item-flag.false"))))));
@@ -894,7 +894,7 @@ public class GuiEditor implements IGui {
                         RPGProject.i18n("gui.editor.items.edit-item-flag.name").replace("%flag%",
                                 RPGProject.i18n("gui.editor.items.edit-item-flag.flags.HIDE_PLACED_ON")),
                         RPGProject.i18n_("gui.editor.items.edit-item-flag.lore",
-                                Lists.newArrayList(new Pair<>("%value%",
+                                Lists.newArrayList(Pair.of("%value%",
                                         this.rpg.getItemFlags().contains(ItemFlag.HIDE_PLACED_ON)
                                                 ? RPGProject.i18n("gui.editor.items.edit-item-flag.true")
                                                 : RPGProject.i18n("gui.editor.items.edit-item-flag.false"))))));
@@ -905,7 +905,7 @@ public class GuiEditor implements IGui {
                         RPGProject.i18n("gui.editor.items.edit-item-flag.name").replace("%flag%",
                                 RPGProject.i18n("gui.editor.items.edit-item-flag.flags.HIDE_POTION_EFFECTS")),
                         RPGProject.i18n_("gui.editor.items.edit-item-flag.lore",
-                                Lists.newArrayList(new Pair<>("%value%",
+                                Lists.newArrayList(Pair.of("%value%",
                                         this.rpg.getItemFlags().contains(ItemFlag.HIDE_POTION_EFFECTS)
                                                 ? RPGProject.i18n("gui.editor.items.edit-item-flag.true")
                                                 : RPGProject.i18n("gui.editor.items.edit-item-flag.false"))))));
@@ -916,7 +916,7 @@ public class GuiEditor implements IGui {
                         RPGProject.i18n("gui.editor.items.edit-item-flag.name").replace("%flag%",
                                 RPGProject.i18n("gui.editor.items.edit-item-flag.flags.HIDE_UNBREAKABLE")),
                         RPGProject.i18n_("gui.editor.items.edit-item-flag.lore",
-                                Lists.newArrayList(new Pair<>("%value%",
+                                Lists.newArrayList(Pair.of("%value%",
                                         this.rpg.getItemFlags().contains(ItemFlag.HIDE_UNBREAKABLE)
                                                 ? RPGProject.i18n("gui.editor.items.edit-item-flag.true")
                                                 : RPGProject.i18n("gui.editor.items.edit-item-flag.false"))))));

@@ -9,7 +9,7 @@ repositories {
     mavenCentral()
     maven { name = 'spigotmc-repo'; url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
     maven { name = 'sonatype'; url = 'https://oss.sonatype.org/content/groups/public/' }
-    maven { name 'sk89q'; url 'https://maven.sk89q.com/artifactory/repo/' }
+    maven { name 'sk89q'; url 'https://repo.dmulloy2.net/repository/public/' }
     maven { name 'vault-repo'; url 'https://jitpack.io' }
     maven { name 'NyaaCat'; url 'https://ci.nyaacat.com/maven/' }
     maven { name 'aikar'; url 'https://repo.aikar.co/content/groups/aikar/' }
@@ -19,7 +19,7 @@ repositories {
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.15.2-R0.1-SNAPSHOT'
     implementation 'cat.nyaa:nyaacore:7.2-SNAPSHOT'
-    implementation 'cat.nyaa:rpgitems:3.8-20210126.130007-108:core'
+    implementation 'top.mrxiaom:rpgitems:3.8-2e8ce4:all'
     implementation 'com.comphenix.protocol:ProtocolLib:4.5.1'
 }
 

@@ -1,6 +1,5 @@
 package top.mrxiaom.rpgproject.gui;
 
-import cat.nyaa.nyaacore.Pair;
 import com.google.common.collect.Lists;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -15,6 +14,7 @@ import think.rpgitems.power.Power;
 import think.rpgitems.power.PowerManager;
 import think.rpgitems.power.PropertyInstance;
 import top.mrxiaom.rpgproject.Enums;
+import top.mrxiaom.rpgproject.Pair;
 import top.mrxiaom.rpgproject.RPGProject;
 import top.mrxiaom.rpgproject.Util;
 
@@ -71,7 +71,7 @@ public class GuiPowerList implements IGui {
         int k = 0;
         for (Power power : this.rpg.getPowers()) {
             if (i >= j - 45 && i < j) {
-                Map<String, Pair<Method, PropertyInstance>> props = PowerManager
+                Map<String, cat.nyaa.nyaacore.Pair<Method, PropertyInstance>> props = PowerManager
                         .getProperties(power.getNamespacedKey());
 
                 List<String> lore = new ArrayList<>();
@@ -112,7 +112,7 @@ public class GuiPowerList implements IGui {
                                     Material.LIME_STAINED_GLASS_PANE),
                             RPGProject.i18n("gui.power-list.items.prev-page.name"),
                             RPGProject.i18n_("gui.power-list.items.prev-page.lore",
-                                    Lists.newArrayList(new Pair<>("%page%", String.valueOf(this.page)), new Pair<>(
+                                    Lists.newArrayList(Pair.of("%page%", String.valueOf(this.page)), Pair.of(
                                             "%max_page%",
                                             String.valueOf((int) Math.ceil(this.rpg.getPowers().size() / 45.0D)))))));
         }
@@ -123,7 +123,7 @@ public class GuiPowerList implements IGui {
                                     Material.LIME_STAINED_GLASS_PANE),
                             RPGProject.i18n("gui.power-list.items.next-page.name"),
                             RPGProject.i18n_("gui.power-list.items.next-page.lore",
-                                    Lists.newArrayList(new Pair<>("%page%", String.valueOf(this.page)), new Pair<>(
+                                    Lists.newArrayList(Pair.of("%page%", String.valueOf(this.page)), Pair.of(
                                             "%max_page%",
                                             String.valueOf((int) Math.ceil(this.rpg.getPowers().size() / 45.0D)))))));
         }

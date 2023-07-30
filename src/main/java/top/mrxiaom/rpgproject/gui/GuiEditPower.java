@@ -1,6 +1,5 @@
 package top.mrxiaom.rpgproject.gui;
 
-import cat.nyaa.nyaacore.Pair;
 import com.google.common.collect.Lists;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -17,6 +16,7 @@ import think.rpgitems.power.Power;
 import think.rpgitems.power.PowerManager;
 import think.rpgitems.power.PropertyInstance;
 import top.mrxiaom.rpgproject.Enums;
+import top.mrxiaom.rpgproject.Pair;
 import top.mrxiaom.rpgproject.RPGProject;
 import top.mrxiaom.rpgproject.Util;
 import top.mrxiaom.rpgproject.prompt.BasicPrompt;
@@ -106,7 +106,7 @@ public class GuiEditPower implements IGui {
         return RPGProject.i18n_("gui.edit-power.items.property.lores.type-unknown");
     }
 
-    Map<Integer, Pair<String, PropertyInstance>> names = new HashMap<>();
+    Map<Integer, cat.nyaa.nyaacore.Pair<String, PropertyInstance>> names = new HashMap<>();
 
     public Map<Integer, ItemStack> getGUIItems() {
         Map<Integer, ItemStack> items = new HashMap<>();
@@ -114,7 +114,7 @@ public class GuiEditPower implements IGui {
         int i = 0;
         int j = 45 * this.page;
         int k = 0;
-        Map<String, Pair<Method, PropertyInstance>> props = PowerManager.getProperties(this.power.getNamespacedKey());
+        Map<String, cat.nyaa.nyaacore.Pair<Method, PropertyInstance>> props = PowerManager.getProperties(this.power.getNamespacedKey());
         for (String name : props.keySet()) {
             if (i >= j - 45 && i < j) {
                 PropertyInstance prop = props.get(name).getValue();
@@ -133,11 +133,11 @@ public class GuiEditPower implements IGui {
                 List<String> lore = RPGProject
                         .i18n_("gui.edit-power.items.property.lores.head",
                                 Lists.newArrayList(
-                                        new Pair<>("%description%",
+                                        Pair.of("%description%",
                                                 Util.i18nEmptyWhenNotFound("properties."
                                                         + this.power.getNamespacedKey().getKey() + "." + name)),
-                                        new Pair<>("%type%", this.getType(prop.field().getType())),
-                                        new Pair<>("%value%", value)));
+                                        Pair.of("%type%", this.getType(prop.field().getType())),
+                                        Pair.of("%value%", value)));
                 lore.addAll(this.getActionLore(prop.field().getType()));
                 items.put(
                         k, Util
@@ -152,7 +152,7 @@ public class GuiEditPower implements IGui {
                                                 Material.ITEM_FRAME),
                                         RPGProject.i18n("gui.edit-power.items.property.name").replace("%name%", name),
                                         lore));
-                this.names.put(k, new Pair<>(name, prop));
+                this.names.put(k, new cat.nyaa.nyaacore.Pair<>(name, prop));
                 k++;
             }
             i++;
@@ -164,8 +164,8 @@ public class GuiEditPower implements IGui {
                                     Material.LIME_STAINED_GLASS_PANE),
                             RPGProject.i18n("gui.edit-power.items.prev-page.name"),
                             RPGProject.i18n_("gui.edit-power.items.prev-page.lore", Lists.newArrayList(
-                                    new Pair<>("%page%", String.valueOf(this.page)),
-                                    new Pair<>("%max_page%", String.valueOf((int) Math.ceil(props.size() / 45.0D)))))));
+                                    Pair.of("%page%", String.valueOf(this.page)),
+                                    Pair.of("%max_page%", String.valueOf((int) Math.ceil(props.size() / 45.0D)))))));
         }
         if (this.page < (double) (props.size() / 45.0D)) {
             items.put(53,
@@ -174,8 +174,8 @@ public class GuiEditPower implements IGui {
                                     Material.LIME_STAINED_GLASS_PANE),
                             RPGProject.i18n("gui.edit-power.items.next-page.name"),
                             RPGProject.i18n_("gui.edit-power.items.next-page.lore", Lists.newArrayList(
-                                    new Pair<>("%page%", String.valueOf(this.page)),
-                                    new Pair<>("%max_page%", String.valueOf((int) Math.ceil(props.size() / 45.0D)))))));
+                                    Pair.of("%page%", String.valueOf(this.page)),
+                                    Pair.of("%max_page%", String.valueOf((int) Math.ceil(props.size() / 45.0D)))))));
         }
         if (this.add) {
             items.put(47,
@@ -210,7 +210,7 @@ public class GuiEditPower implements IGui {
         }
         // 点击属性图标
         if (clickedSlot < 45 && this.names.containsKey(clickedSlot)) {
-            Pair<String, PropertyInstance> pair = this.names.get(clickedSlot);
+            cat.nyaa.nyaacore.Pair<String, PropertyInstance> pair = this.names.get(clickedSlot);
             boolean left = event.isLeftClick();
             boolean right = event.isRightClick();
             boolean shift = event.isShiftClick();

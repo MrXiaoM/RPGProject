@@ -1,6 +1,5 @@
 package top.mrxiaom.rpgproject.gui;
 
-import cat.nyaa.nyaacore.Pair;
 import com.google.common.collect.Lists;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -16,6 +15,7 @@ import think.rpgitems.item.RPGItem;
 import think.rpgitems.power.Power;
 import think.rpgitems.power.PowerManager;
 import top.mrxiaom.rpgproject.Enums;
+import top.mrxiaom.rpgproject.Pair;
 import top.mrxiaom.rpgproject.RPGProject;
 import top.mrxiaom.rpgproject.Util;
 
@@ -77,9 +77,9 @@ public class GuiAddPower implements IGui {
                                 RPGProject.i18n("gui.add-power.items.power.name").replace("%name%", power.getKey())
                                         .replace("%display%", Util.i18n("properties." + power.getKey() + ".main_name")),
                                 RPGProject.i18n_("gui.add-power.items.power.lore",
-                                        Lists.newArrayList(new Pair<>("%namespace%", power.getNamespace()),
-                                                new Pair<>("%key%", power.getKey()),
-                                                new Pair<>("%description%", Util.i18nEmptyWhenNotFound(
+                                        Lists.newArrayList(Pair.of("%namespace%", power.getNamespace()),
+                                                Pair.of("%key%", power.getKey()),
+                                                Pair.of("%description%", Util.i18nEmptyWhenNotFound(
                                                         "properties." + power.getKey() + ".main_description"))))));
                 k++;
             }
@@ -90,7 +90,7 @@ public class GuiAddPower implements IGui {
                             RPGProject.i18n("gui.add-power.items.prev-page.material"), Material.LIME_STAINED_GLASS_PANE),
                     RPGProject.i18n("gui.add-power.items.prev-page.name"),
                     RPGProject.i18n_("gui.add-power.items.prev-page.lore",
-                            Lists.newArrayList(new Pair<>("%page%", String.valueOf(this.page)), new Pair<>("%max_page%",
+                            Lists.newArrayList(Pair.of("%page%", String.valueOf(this.page)), Pair.of("%max_page%",
                                     String.valueOf((int) Math.ceil(PowerManager.getPowers().size() / 45.0D)))))));
         }
         if (this.page < (PowerManager.getPowers().size() / 45.0D)) {
@@ -98,7 +98,7 @@ public class GuiAddPower implements IGui {
                             RPGProject.i18n("gui.add-power.items.next-page.material"), Material.LIME_STAINED_GLASS_PANE),
                     RPGProject.i18n("gui.add-power.items.next-page.name"),
                     RPGProject.i18n_("gui.add-power.items.next-page.lore",
-                            Lists.newArrayList(new Pair<>("%page%", String.valueOf(this.page)), new Pair<>("%max_page%",
+                            Lists.newArrayList(Pair.of("%page%", String.valueOf(this.page)), Pair.of("%max_page%",
                                     String.valueOf((int) Math.ceil(PowerManager.getPowers().size() / 45.0D)))))));
         }
         items.put(49,
